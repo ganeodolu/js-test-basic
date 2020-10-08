@@ -7,30 +7,31 @@ function isErrorInitialState({ initVal, min, max }) {
 }
 
 export function createCounter({ initVal = 0, min, max } = {}) {
+  let value = initVal;
   return {
     val() {
-      return isErrorInitialState({ initVal, min, max }) || initVal;
+      return isErrorInitialState({ initVal, min, max }) || value;
     },
     inc() {
       if (!!isErrorInitialState({ initVal, min, max }))
         return isErrorInitialState({ initVal, min, max });
-      if (max && initVal + 1 >= max) {
-        return initVal;
+      if (max && value + 1 > max) {
+        return value;
       }
-      return ++initVal;
+      return ++value;
     },
     dec() {
       if (!!isErrorInitialState({ initVal, min, max }))
         return isErrorInitialState({ initVal, min, max });
-      if (min && initVal - 1 <= min) {
-        return initVal;
+      if (min && value - 1 < min) {
+        return value;
       }
-      return --initVal;
+      return --value;
     },
     isMax() {
       if (!!isErrorInitialState({ initVal, min, max }))
         return isErrorInitialState({ initVal, min, max });
-      if (initVal === max) {
+      if (value === max) {
         return true;
       }
       return false;
@@ -38,7 +39,7 @@ export function createCounter({ initVal = 0, min, max } = {}) {
     isMin() {
       if (!!isErrorInitialState({ initVal, min, max }))
         return isErrorInitialState({ initVal, min, max });
-      if (initVal === min) {
+      if (value === min) {
         return true;
       }
       return false;

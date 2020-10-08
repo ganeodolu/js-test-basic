@@ -22,10 +22,12 @@ describe("옵션이 지정되지 않은 경우", () => {
 
   it("inc() 함수는 값을 1증가시킨다.", () => {
     expect(counter.inc()).toBe(1);
+    expect(counter.inc()).toBe(2);
   });
 
   it("dec() 함수는 값을 1감소시킨다.", () => {
     expect(counter.dec()).toBe(-1);
+    expect(counter.dec()).toBe(-2);
   });
 
   it("isMax() 호출시 false를 반환한다.", () => {
@@ -64,7 +66,6 @@ describe("min 옵션 사용 시 현재값이 min 값 보다 작으면", () => {
   });
 });
 
-
 describe("min 옵션 사용 시 현재값에서 -1한 값이 min 값 보다 작으면", () => {
   it("dec() 함수를 호출해도 값이 감소하지 않는다.", () => {
     expect(mockFn({ initVal: 3.1, min: 3 }).dec()).toEqual(3.1);
@@ -75,6 +76,11 @@ describe("min 옵션 사용 시 현재값에서 -1한 값이 min 값 보다 작�
 describe("max 옵션 사용 시 현재값과 max 값이 동일하면", () => {
   it("inc() 함수를 호출해도 값이 증가하지 않는다.", () => {
     expect(mockFn({ initVal: 3, max: 3 }).inc()).toEqual(3);
+    counter = createCounter({ initVal: 3, max: 5 });
+    counter.inc();
+    counter.inc();
+    counter.inc();
+    expect(counter.val()).toEqual(5);
   });
 
   it("isMax() 호출 시 true를 반환한다.", () => {
@@ -101,4 +107,3 @@ describe("max 옵션 사용 시 현재값에서 +1인 값이 max 값이 보다 �
     expect(mockFn({ initVal: 3, max: 3 }).isMax()).toEqual(true);
   });
 });
-
