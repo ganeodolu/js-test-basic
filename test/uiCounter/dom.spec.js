@@ -33,10 +33,12 @@ it("- 버튼 클릭시 1 감소한다.", () => {
 
 it("Max값인 경우 + 버튼이 disabled 상태가 되며 클릭해도 증가하지 않는다.", () => {
   createUICounter(container, { initVal: 1, max: 1 });
-  expect(screen.getByText("+").toBeDisabled());
+  expect(screen.getByText("+")).toBeDisabled();
+  console.log(document.body.innerHTML);
 });
 
 it("Min값인 경우 - 버튼이 disabled 상태가 되며, 클릭해도 감소하지 않는다.", () => {
   createUICounter(container, { initVal: 1, min: 1 });
-  expect(screen.getByText("-").toBeDisabled());
+  expect(screen.getByText("-")).toBeDisabled();
 });
+
